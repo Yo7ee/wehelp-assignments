@@ -1,0 +1,108 @@
+html{
+    font-size:20px;
+}
+header{
+    display:flex;/*將header裡面的物件水平排列*/
+}
+div{
+    margin:auto;/*垂直置中*/
+}
+ul{
+    list-style: none;
+    display:flex; /*讓下一個層次將item1-4水平排列*/
+    
+}
+.Item{
+    display:flex;
+    justify-content: flex-end;/*水平對齊*/
+    flex:auto;/*將剩下空間填滿*/
+    align-items: center;/*將item垂直置中*/
+}
+li{
+    flex:none; /*沒有彈性，固定配置*/
+    width:100px;
+    text-align: right;
+}
+h1{
+    font-size: 2rem;
+}
+section{
+    background-color:cadetblue;
+    height:15rem;
+    width:100%;/*For 滿版*/
+    /*以下為水平垂直置中*/
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+article{
+    display:flex;
+    flex-wrap:wrap;/*讓圖片換行*/
+    justify-content:center;
+    margin:0 auto;/*讓article位在page的中間*/
+    width:60rem;
+}
+figure{
+    margin:0.2rem;
+    /*讓圖片及文字可以並列*/
+    display:flex;
+    flex-flow: column;
+    line-height: 2rem;
+}
+img{
+    width:14rem;
+    height:13rem;
+    margin-top: 0.4rem;
+}
+figcaption{
+    text-align: center;
+    background-color: lightblue;
+    
+}
+@media (min-width:1200px){
+    .menu{
+        display: none;
+    }
+}
+@media (min-width:600px) and (max-width:1200px){
+    .menu{
+        display:none;
+    }
+    article{
+        width:90%;
+    }
+    figure{
+        width:45%;/*讓圖片兩個一列*/
+    }
+    img{
+        width:100%;
+        object-fit: cover;/*讓圖片不變形，且以中央為中心放大並將多餘的圖片切除*/
+    }
+}
+@media (max-width:600px){
+    
+    article{
+        width:90%;
+    }
+    figure{
+        width:90%;
+    }
+    img{
+        width:100%;
+        object-fit: cover;
+    }
+    ul{
+        display:none;
+    }
+    .burger{
+        margin:auto 0;
+    }
+    .menu{
+        width:2.5rem;
+        height:2.5rem;
+        margin-top: 0;
+    }
+    h1{
+        font-size: 1.2rem;
+    }
+}
