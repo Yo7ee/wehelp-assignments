@@ -15,8 +15,9 @@ def avg(data):
         # print(data["employees"])
         # print(i)
         sum = sum + data["employees"][i]["salary"]
+    avgSalary = sum/len(data["employees"])
         # print(data["employees"][i]["salary"])
-    print(sum)
+    print(avgSalary)
 #below is call def
 avg({
     "count":3,
