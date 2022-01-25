@@ -40,12 +40,11 @@ def signin():
 
 @app.route("/member")
 def success():
-    status=session["status"]
-    print(status)
-    if status =="已登入":
+    print(session)
+    if 'username' in session:
         return render_template("success.html")
-    elif status=="未登入":
-        return redirect("/")
+    return redirect("/")
+
 
 @app.route("/error")
 def failed():
