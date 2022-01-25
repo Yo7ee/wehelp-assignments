@@ -19,13 +19,13 @@ def home():
 @app.route("/signin", methods=["POST"])
 def signin():
     userName=request.form["username"]
-    session["username"]=userName
     passWord=request.form["password"]
-    session["password"]=passWord
 
     if userName=="test" and passWord=="test":
         condition="已登入"
         session["status"]=condition
+        session["username"]=userName
+        session["password"]=passWord
         return redirect("/member")
     elif userName=="" or passWord=="":
         condition="未登入"
