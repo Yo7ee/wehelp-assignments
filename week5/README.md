@@ -44,8 +44,7 @@ SELECT * FROM member where username="test" and password="test";
 ```
 ![image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%889.58.24.png)
 
-### 使用 UPDATE 指令更新欄位 username 是 test 的會員資料，將資料中的 name 欄位
-改成 test2。
+### 使用 UPDATE 指令更新欄位 username 是 test 的會員資料，將資料中的 name 欄位改成 test2。
 ```mysql
 UPDATE member SET username="test2" WHERE username="test";
 SELECT * FROM member;
