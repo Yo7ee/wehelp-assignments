@@ -30,19 +30,19 @@ SELECT * FROM member ORDER by time DESC;
 ```mysql
 SELECT * FROM member ORDER BY time DESC LIMIT 1,3;
 ```
-[image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%884.24.37.png)
+![image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%884.24.37.png)
 
 ### 使用 SELECT 指令取得欄位 username 是 test 的會員資料。
 ```mysql
 SELECT * FROM member where username="test";
 ```
-[image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%889.51.39.png)
+![image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%889.51.39.png)
 
 ### 使用 SELECT 指令取得欄位 username 是 test、且欄位 password 也是 test 的資料。
 ```mysql
 SELECT * FROM member where username="test" and password="test";
 ```
-[image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%889.58.24.png)
+![image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%889.58.24.png)
 
 ### 使用 UPDATE 指令更新欄位 username 是 test 的會員資料，將資料中的 name 欄位
 改成 test2。
@@ -50,7 +50,7 @@ SELECT * FROM member where username="test" and password="test";
 UPDATE member SET username="test2" WHERE username="test";
 SELECT * FROM member;
 ```
-[image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%8810.05.16.png)
+![image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%8810.05.16.png)
 
 ### question4
 要求四：SQL Aggregate Functions
@@ -65,19 +65,19 @@ UPDATE member SET follower_count = CASE id WHEN 1 THEN 4 WHEN 3 THEN 10 WHEN 4 T
 ```mysql
 SELECT COUNT(id) FROM member;
 ```
-[image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%8810.16.36.png)
+![image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%8810.16.36.png)
 
 ### 取得 member 資料表中，所有會員 follower_count 欄位的總和。
 ```mysql
 SELECT SUM(follower_count) FROM member;
 ```
-[image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%8810.32.20.png)
+![image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%8810.32.20.png)
 
 ### 取得 member 資料表中，所有會員 follower_count 欄位的平均數。
 ```mysql
 SELECT AVG(follower_count) FROM member;
 ```
-[image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%8810.31.45.png)
+![image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%8810.31.45.png)
 
 
 ## question5
@@ -91,16 +91,16 @@ CREATE TABLE message(
     -> content varchar(255) NOT NULL COMMENT'留言內容',
     -> time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT'
 ```
-[image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-26%20%E4%B8%8A%E5%8D%8810.40.42.png)
+![image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-26%20%E4%B8%8A%E5%8D%8810.40.42.png)
 
 ### 使用 SELECT 搭配 JOIN 語法，取得所有留言，結果須包含留言者會員的姓名。
 ```mysql
 SELECT member.name, message.content FROM member INNER JOIN message ON member.id = message.member_id;
 ```
-[image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-26%20%E4%B8%8A%E5%8D%8811.58.02.png)
+![image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-26%20%E4%B8%8A%E5%8D%8811.58.02.png)
 
 ### 使用 SELECT 搭配 JOIN 語法，取得 member 資料表中欄位 username 是 test 的所有留言，資料中須包含留言者會員的姓名。
 ```mysql
 SELECT member.name, message.content FROM member INNER JOIN message ON member.id = message.member_id WHERE member.username="test2";
 ```
-[image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-26%20%E4%B8%8B%E5%8D%8812.00.48.png)
+![image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-26%20%E4%B8%8B%E5%8D%8812.00.48.png)
