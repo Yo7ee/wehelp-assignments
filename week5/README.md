@@ -58,7 +58,7 @@ SELECT * FROM member;
 ```mysql
 UPDATE member SET follower_count = CASE id WHEN 1 THEN 4 WHEN 3 THEN 10 WHEN 4 THEN 500 WHEN 5 THEN 22 END WHERE id in(1,3,4,5);
 ```
-[image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%8810.39.51.png)
+![image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%8810.39.51.png)
 
 ### 取得 member 資料表中，總共有幾筆資料 ( 幾位會員 )。
 ```mysql
