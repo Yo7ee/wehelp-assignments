@@ -19,12 +19,12 @@ INSERT INTO member (name, username, password) VALUES ("LUCY",
 ```mysqql
 SELECT * FROM member;
 ```
-[image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%883.33.33.png)
+![image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%883.33.33.png)
 ### 使用 SELECT 指令取得所有在 member 資料表中的會員資料，並按照 time 欄位，由近到遠排序。
 ```mysql
 SELECT * FROM member ORDER by time DESC;
 ```
-[image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%883.53.02.png)
+![image](https://github.com/Yo7ee/wehelp-assignments/blob/65159405d212fb83ce68f12aaf6dcb16cbf2664e/week5/screenshot/%E6%88%AA%E5%9C%96%202022-01-25%20%E4%B8%8B%E5%8D%883.53.02.png)
 
 ### 使用 SELECT 指令取得 member 資料表中第 2 ~ 4 共三筆資料，並按照 time 欄位，由近到遠排序。( 並非編號 2、3、4 的資料，而是排序後的第 2 ~ 4 筆資料 )
 ```mysql
