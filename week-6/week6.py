@@ -24,6 +24,7 @@ def home():
 def signup():
     name=request.form["name"]
     userName=request.form["username"]
+    userName=userName,#將str轉換成tuple解決這個錯誤：mysql.connector.errors.ProgrammingError: Could not process parameters: str(test), it must be of type list, tuple or dict
     passWord=request.form["password"]
 
     mydb=mysql.connector.connect(
@@ -34,40 +35,44 @@ def signup():
     )
     mycursor = mydb.cursor()
 
-    mycursor.execute("SELECT username FROM member WHERE name= %s AND username= %s", (name, userName))#把name寫進來是避免出現這個錯誤：mysql.connector.errors.ProgrammingError: Could not process parameters: str(test), it must be of type list, tuple or dict
-    mydbUserName=mycursor.fetchall()
+    mycursor.execute("SELECT username FROM member WHERE username= %s", (userName))
+    checkUserName=mycursor.fetchall()
 
-    print(mydbUserName) #[('test'),('test')]=>list
-    print(mydbUserName[0]) #('test',)=>tuple
-    print(userName) #test=>str
+    # print(checkUserName) #[('test'),('test')]=>list
+    # print(checkUserName[0]) #('test',)=>tuple
+    # print(userName) #test=>str
     
-    for x in mydbUserName:
-        if userName in x:
-            result="帳號已被註冊"
-            return redirect(url_for('failed', message=result))
-            break
-        else:
-            sql="INSERT INTO member(name, username, password) VALUES(%s, %s, %s)"
-            val=(name,userName, passWord)
-            mycursor.execute(sql, val)
+    #當userName為str時，需使用for迴圈將mydbUserName(tuple)轉換成str,接著使用if進行userName(str)與轉換成str的mydbUserName進行判斷
+    # for x in mydbUserName:
+    #     if userName in x:
+    #         result="帳號已被註冊"
+    #         return redirect(url_for('failed', message=result))
+    #         break
+    #     else:
+    #         sql="INSERT INTO member(name, username, password) VALUES(%s, %s, %s)"
+    #         val=(name,userName, passWord)
+    #         mycursor.execute(sql, val)
 
-            mydb.commit()
-            print(mycursor.rowcount, "record inserted.")
+    #         mydb.commit()
+    #         print(mycursor.rowcount, "record inserted.")
 
-            # thinter.messagebox.showinfo('Info','註冊成功')
-            return redirect("/")
-    #想直接使用SELECT進行username的重複確認=>攥寫中！(卡關在mysql只能process list, tuple, dict, 但username是str)
-    # if userName in checkUserName:
-    #     result="帳號已被註冊"
-    #     return redirect(url_for('failed', message=result))
-    # else:
-    #     sql="INSERT INTO member(name, username, password) VALUES(%s, %s, %s)"
-    #     val=(name, userName, passWord)
-    #     mycursor.execute(sql, val)
+    #         # thinter.messagebox.showinfo('Info','註冊成功')
+    #         return redirect("/")
 
-    #     mydb.commit()
-    #     print(mycursor.rowcount, "record inserted.")
-    #     return redirect("/")
+    #直接使用SELECT進行username的重複確認=>解決！(之前卡關在mysql只能process list, tuple, dict, 但username是str，使用"userName,"將userName從str轉換成tuple)
+    print(checkUserName) #[('test',)] =>list
+    print(type(userName,)) #tuple
+    if userName in checkUserName:
+        result="帳號已被註冊"
+        return redirect(url_for('failed', message=result))
+    else:
+        sql="INSERT INTO member(name, username, password) VALUES(%s, %s, %s)"
+        val=(name, userName, passWord)
+        mycursor.execute(sql, val)
+
+        mydb.commit()
+        print(mycursor.rowcount, "record inserted.")
+        return redirect("/")
 
 
 @app.route("/signin", methods=["POST"])
