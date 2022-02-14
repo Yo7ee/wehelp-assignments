@@ -20,7 +20,6 @@ ul{
     display:flex;
     justify-content: flex-end;/*水平對齊*/
     flex:auto;/*將剩下空間填滿*/
-    align-items: center;/*將item垂直置中*/
 }
 li{
     flex:none; /*沒有彈性，固定配置*/
@@ -33,8 +32,7 @@ h1{
 section{
     background-color:cadetblue;
     height:15rem;
-    width:100%;/*For 滿版*/
-    /*以下為水平垂直置中*/
+    /*以下為水平垂直置中 or 在h1加入margin:auto */
     display:flex;
     justify-content: center;
     align-items: center;
@@ -49,8 +47,6 @@ article{
 figure{
     margin:0.2rem;
     /*讓圖片及文字可以並列，中間無空格。也可以用vertical-align:top*/
-    display:flex;
-    flex-flow: column;
     line-height: 2rem;
     /*讓圖片4個一列*/
     width: 14rem;
@@ -64,8 +60,11 @@ img{
 figcaption{
     text-align: center;
     background-color: lightblue;
-    /*讓圖片不要被figcaption蓋住*/
-    /* height:100%; */
+}
+button{
+    font-size: 1.5rem;
+    display:flex; /*把block製造出來*/
+    margin:auto; /*將element置中*/
 }
 @media (min-width:1200px){
     .menu{
