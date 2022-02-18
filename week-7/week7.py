@@ -1,0 +1,162 @@
+from flask import Flask, jsonify
+from flask import render_template
+from flask import redirect
+from flask import request
+from flask import session
+from flask import url_for
+import config
+# import thinter as thinter
+# from thinter import messagebox
+import mysql.connector
+
+app=Flask(
+    __name__,
+    # static_folder="static",
+    # static_url_path="/"
+)
+app.secret_key="abc" #For session
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+@app.route("/signup", methods=["POST"])
+def signup():
+    name=request.form["name"]
+    userName=request.form["username"]
+    userName=userName,#將str轉換成tuple解決這個錯誤：mysql.connector.errors.ProgrammingError: Could not process parameters: str(test), it must be of type list, tuple or dict
+    passWord=request.form["password"]
+
+    mydb=mysql.connector.connect(
+        host=config.mysql["host"],
+        user=config.mysql["user"],
+        password=config.mysql["password"],
+        database="mydatabase"
+    )
+    mycursor = mydb.cursor()
+
+    mycursor.execute("SELECT username FROM member WHERE username= %s", (userName))
+    checkUserName=mycursor.fetchall()
+
+    # print(checkUserName) #[('test'),('test')]=>list
+    # print(checkUserName[0]) #('test',)=>tuple
+    # print(userName) #test=>str
+    
+    #當userName為str時，需使用for迴圈將mydbUserName(tuple)轉換成str,接著使用if進行userName(str)與轉換成str的mydbUserName進行判斷
+    # for x in mydbUserName:
+    #     if userName in x:
+    #         result="帳號已被註冊"
+    #         return redirect(url_for('failed', message=result))
+    #         break
+    #     else:
+    #         sql="INSERT INTO member(name, username, password) VALUES(%s, %s, %s)"
+    #         val=(name,userName, passWord)
+    #         mycursor.execute(sql, val)
+
+    #         mydb.commit()
+    #         print(mycursor.rowcount, "record inserted.")
+
+    #         # thinter.messagebox.showinfo('Info','註冊成功')
+    #         return redirect("/")
+
+    #直接使用SELECT進行username的重複確認=>解決！(之前卡關在mysql只能process list, tuple, dict, 但username是str，使用"userName,"將userName從str轉換成tuple)
+    print(checkUserName) #[('test',)] =>list
+    print(type(userName,)) #tuple
+    if userName in checkUserName:
+        result="帳號已被註冊"
+        return redirect(url_for('failed', message=result))
+    else:
+        sql="INSERT INTO member(name, username, password) VALUES(%s, %s, %s)"
+        val=(name, userName, passWord)
+        mycursor.execute(sql, val)
+
+        mydb.commit()
+        print(mycursor.rowcount, "record inserted.")
+        return redirect("/")
+
+
+@app.route("/signin", methods=["POST"])
+def signin():
+    userName=request.form["username"]
+    passWord=request.form["password"]
+    mydb=mysql.connector.connect(
+        host=config.mysql["host"],
+        user=config.mysql["user"],
+        password=config.mysql["password"],
+        database="mydatabase"
+    )
+    mycursor = mydb.cursor()
+    mycursor.execute("SELECT name FROM member WHERE username= %s AND password= %s", (userName,passWord))
+    mydbUserName=mycursor.fetchall()
+
+    if mydbUserName==[]:
+        condition="未登入"
+        session["status"]=condition
+        result="帳號、或密碼輸入錯誤"
+        return redirect(url_for('failed',message=result))
+    elif userName=="" or passWord=="":
+        condition="未登入"
+        session["status"]=condition
+        result="請輸入帳號、密碼"
+        return redirect(url_for('failed', message=result))#url_for('函式名稱', 參數)=>網址加變數字串
+    else:
+        condition="已登入"
+        session["status"]=condition
+        session["username"]=userName
+        session["password"]=passWord
+        print(mydbUserName)
+        session["name"]=mydbUserName
+        return redirect(url_for('success'))
+        
+
+@app.route("/member")
+def success():
+    if 'username' in session:
+        print(type(session["username"]))
+        print(session)
+        result=','.join(session["name"][0])#將tuple轉換為str
+        print(type(result))
+        return render_template("success.html", name=result)#name is the what I put in html
+    return redirect("/")
+
+    # status=request.args.get("condition")
+    # print(status)
+    # if status == "未登入" or status == None:
+    #     return redirect("/")
+    # else:
+    #     return render_template("success.html")
+
+# def getName():
+
+@app.route("/error")
+def failed():
+    message =request.args.get("message")
+    return render_template("failed.html", message=message) #first message is what I put in html
+
+@app.route("/signout", methods=["GET"])
+def signout():
+    session.pop("username", None)
+    session["status"]="未登入"
+    print(session["status"])
+    return redirect("/")
+
+#建立api
+@app.route("/api/members", methods=["GET"])
+def checkNameApi():
+    username=request.args.get("username")
+    username=username, #covert str to tuple
+    mydb=mysql.connector.connect(
+        host=config.mysql["host"],
+        user=config.mysql["user"],
+        password=config.mysql["password"],
+        database="mydatabase"
+    )
+    mycursor=mydb.cursor()
+    mycursor.execute("SELECT id, name, username FROM member WHERE username=%s", (username))
+    info=mycursor.fetchall()
+    print(type(info)) #<class 'list'>
+    if info == []:
+        return jsonify({"data":None})
+    return jsonify({"data":{"id":info[0][0], "name":info[0][1], "username":info[0][2]}})
+
+app.run(port=3000, debug=True)

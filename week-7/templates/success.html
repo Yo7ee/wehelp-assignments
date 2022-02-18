@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+    <meta charest="utf-8"/>
+    <title>登入成功</title>
+    <link href="{{url_for('static', filename='home.css')}}" type="text/css" rel="stylesheet" >
+    <script src="../static/week7.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>歡迎光臨，這是會員頁</h1>
+    </header>
+    <section>
+        {{name}} 歡迎登入系統<br>
+    <form action="signout" method="GET"><a href="signout">登出系統</a></form>
+    </section>
+    <main>
+        <div>查詢會員姓名</div>
+    <input id="username" type="text" name="username">
+    <button onclick="searchName();">查詢</button>
+    <aside>
+        
+    </aside>
+        <div>更新我的姓名</div>
+        <input type="text" rename="username"><button>更新</button>
+        {{message}}
+    </main>
+</body>
+</html>
